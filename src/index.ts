@@ -7,6 +7,7 @@ import { createConnection } from "typeorm";
 import { MyContext } from "./types";
 
 import { HelloResolver } from "./resolvers/hello";
+import { Habit } from "./entities/Habit";
 
 const main = async () => {
   dotenv.config();
@@ -16,7 +17,7 @@ const main = async () => {
     database: process.env.DB,
     logging: true,
     synchronize: true,
-    entities: [],
+    entities: [Habit],
   });
 
   const app = express();
