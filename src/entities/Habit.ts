@@ -25,7 +25,7 @@ export class Habit extends BaseEntity {
 
   @Field()
   @Column()
-  goal:number
+  goal!:number
 
   @Field(() => String)
   @CreateDateColumn()

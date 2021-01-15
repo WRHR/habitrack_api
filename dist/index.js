@@ -20,6 +20,7 @@ const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const hello_1 = require("./resolvers/hello");
 const Habit_1 = require("./entities/Habit");
+const habit_1 = require("./resolvers/habit");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     yield typeorm_1.createConnection({
@@ -32,7 +33,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = express_1.default();
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [hello_1.HelloResolver],
+            resolvers: [hello_1.HelloResolver, habit_1.HabitResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({ req, res }),

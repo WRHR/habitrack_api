@@ -8,6 +8,7 @@ import { MyContext } from "./types";
 
 import { HelloResolver } from "./resolvers/hello";
 import { Habit } from "./entities/Habit";
+import { HabitResolver } from "./resolvers/habit";
 
 const main = async () => {
   dotenv.config();
@@ -24,7 +25,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver],
+      resolvers: [HelloResolver, HabitResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res }),
