@@ -45,7 +45,7 @@ export class HabitResolver {
     return await Habit.find();
   }
 
-  @Mutation(()=>HabitResponse)
+  @Mutation(() => HabitResponse)
   async createHabit(@Arg("input") input: HabitInput): Promise<HabitResponse> {
     let habit;
     if (!input.name) {
@@ -84,5 +84,46 @@ export class HabitResolver {
       }
     }
     return { habit };
+  }
+
+  @Mutation(() => HabitResponse)
+  async updateHabit(
+    @Arg("input") input: HabitInput,
+    @Arg("id") id: number
+  ): Promise<HabitResponse> {
+    let habit = Habit.findOne({ id });
+    if (!habit) {
+      return {
+        errors: [
+          {
+            field: "habit",
+            message: "Could not find the habit requested",
+          },
+        ],
+      };
+    }
+    if (input.name && input.goal) {
+      try {
+        Habit.update({ id }, { ...input });
+      } catch (err) {
+        if (err) {
+          return {
+            errors: [
+              {
+                field: "habit",
+                message: "An error occured, try again",
+              },
+            ],
+          };
+        }
+      }
+    }
+    return { habit: await Habit.findOne({ id }) };
+  }
+
+  @Mutation(()=> Boolean)
+  async deleteHabit(@Arg('id') id:number):Promise<Boolean>{
+    await Habit.delete(id)
+    return true
   }
 }

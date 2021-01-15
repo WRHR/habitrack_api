@@ -115,6 +115,45 @@ let HabitResolver = class HabitResolver {
             return { habit };
         });
     }
+    updateHabit(input, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let habit = Habit_1.Habit.findOne({ id });
+            if (!habit) {
+                return {
+                    errors: [
+                        {
+                            field: "habit",
+                            message: "Could not find the habit requested",
+                        },
+                    ],
+                };
+            }
+            if (input.name && input.goal) {
+                try {
+                    Habit_1.Habit.update({ id }, Object.assign({}, input));
+                }
+                catch (err) {
+                    if (err) {
+                        return {
+                            errors: [
+                                {
+                                    field: "habit",
+                                    message: "An error occured, try again",
+                                },
+                            ],
+                        };
+                    }
+                }
+            }
+            return { habit: yield Habit_1.Habit.findOne({ id }) };
+        });
+    }
+    deleteHabit(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield Habit_1.Habit.delete(id);
+            return true;
+        });
+    }
 };
 __decorate([
     type_graphql_1.Query(() => [Habit_1.Habit]),
@@ -129,6 +168,21 @@ __decorate([
     __metadata("design:paramtypes", [HabitInput]),
     __metadata("design:returntype", Promise)
 ], HabitResolver.prototype, "createHabit", null);
+__decorate([
+    type_graphql_1.Mutation(() => HabitResponse),
+    __param(0, type_graphql_1.Arg("input")),
+    __param(1, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [HabitInput, Number]),
+    __metadata("design:returntype", Promise)
+], HabitResolver.prototype, "updateHabit", null);
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Arg('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], HabitResolver.prototype, "deleteHabit", null);
 HabitResolver = __decorate([
     type_graphql_1.Resolver()
 ], HabitResolver);
