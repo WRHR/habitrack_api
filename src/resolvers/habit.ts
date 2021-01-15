@@ -1,4 +1,4 @@
-import { Habit } from "src/entities/Habit";
+import { Habit } from "../entities/Habit";
 import {
   Arg,
   Field,
@@ -45,7 +45,7 @@ export class HabitResolver {
     return await Habit.find();
   }
 
-  @Mutation()
+  @Mutation(()=>HabitResponse)
   async createHabit(@Arg("input") input: HabitInput): Promise<HabitResponse> {
     let habit;
     if (!input.name) {

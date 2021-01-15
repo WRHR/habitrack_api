@@ -22,7 +22,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HabitResolver = void 0;
-const Habit_1 = require("src/entities/Habit");
+const Habit_1 = require("../entities/Habit");
 const type_graphql_1 = require("type-graphql");
 let FieldError = class FieldError {
 };
@@ -123,7 +123,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HabitResolver.prototype, "habits", null);
 __decorate([
-    type_graphql_1.Mutation(),
+    type_graphql_1.Mutation(() => HabitResponse),
     __param(0, type_graphql_1.Arg("input")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [HabitInput]),
