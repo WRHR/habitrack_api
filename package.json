@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch":"tsc -w",
-    "dev":"nodemon dist/index.js",
-    "start":"node dist/index.js"
+    "watch": "tsc -w",
+    "dev": "nodemon dist/index.js",
+    "start": "node dist/index.js"
   },
   "author": "WR",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^2.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
     "pg": "^8.5.1",

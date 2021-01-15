@@ -1,18 +1,44 @@
-import 'reflect-metadata'
-import express from 'express'
-import {} from 'apollo-server-express'
-import {} from 'type-graphql'
-import {} from 'typeorm'
+import "reflect-metadata";
+import dotenv from "dotenv";
+import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
+import { MyContext } from "./types";
 
+import { HelloResolver } from "./resolvers/hello";
 
-const main = () => {
-  const app = express()
+const main = async () => {
+  dotenv.config();
 
+  await createConnection({
+    type: "postgres",
+    database: process.env.DB,
+    logging: true,
+    synchronize: true,
+    entities: [],
+  });
 
-  let PORT = process.env.PORT || 5000
-  app.listen(PORT, ()=>{
-    console.log(`Server started on ${PORT}`)
-  })
-}
+  const app = express();
 
-main()
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [HelloResolver],
+      validate: false,
+    }),
+    context: ({ req, res }): MyContext => ({ req, res }),
+  });
+
+  apolloServer.applyMiddleware({
+    app,
+    cors: false,
+  });
+
+  let PORT = process.env.PORT;
+
+  app.listen(PORT, () => {
+    console.log(`Server started on ${PORT}`);
+  });
+};
+
+main();
