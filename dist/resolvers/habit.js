@@ -24,23 +24,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HabitResolver = void 0;
 const Habit_1 = require("../entities/Habit");
 const type_graphql_1 = require("type-graphql");
-let FieldError = class FieldError {
+let HabitError = class HabitError {
 };
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
-], FieldError.prototype, "field", void 0);
+], HabitError.prototype, "field", void 0);
 __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", String)
-], FieldError.prototype, "message", void 0);
-FieldError = __decorate([
+], HabitError.prototype, "message", void 0);
+HabitError = __decorate([
     type_graphql_1.ObjectType()
-], FieldError);
+], HabitError);
 let HabitResponse = class HabitResponse {
 };
 __decorate([
-    type_graphql_1.Field(() => [FieldError], { nullable: true }),
+    type_graphql_1.Field(() => [HabitError], { nullable: true }),
     __metadata("design:type", Array)
 ], HabitResponse.prototype, "errors", void 0);
 __decorate([

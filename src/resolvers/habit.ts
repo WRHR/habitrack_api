@@ -10,7 +10,7 @@ import {
 } from "type-graphql";
 
 @ObjectType()
-class FieldError {
+class HabitError {
   @Field()
   field: string;
   @Field()
@@ -19,8 +19,8 @@ class FieldError {
 
 @ObjectType()
 class HabitResponse {
-  @Field(() => [FieldError], { nullable: true })
-  errors?: FieldError[];
+  @Field(() => [HabitError], { nullable: true })
+  errors?: HabitError[];
 
   @Field(() => Habit, { nullable: true })
   habit?: Habit;
