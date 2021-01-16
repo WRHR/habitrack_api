@@ -16,6 +16,7 @@ import { Habit } from "./entities/Habit";
 import { HabitResolver } from "./resolvers/habit";
 import { User } from "./entities/User";
 import { UserResolver } from "./resolvers/user";
+import { Streak } from "./entities/Streak";
 
 const main = async () => {
   dotenv.config();
@@ -25,7 +26,7 @@ const main = async () => {
     database: process.env.DB,
     logging: true,
     synchronize: true,
-    entities: [Habit, User],
+    entities: [Habit, User, Streak],
   });
 
   const app = express();

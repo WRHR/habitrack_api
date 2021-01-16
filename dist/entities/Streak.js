@@ -29,6 +29,16 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Number)
 ], Streak.prototype, "currentStreak", void 0);
+__decorate([
+    type_graphql_1.Field(() => String),
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", Date)
+], Streak.prototype, "createdAt", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.UpdateDateColumn(),
+    __metadata("design:type", Date)
+], Streak.prototype, "updatedAt", void 0);
 Streak = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()
