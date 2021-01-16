@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateRegister = void 0;
 const validateRegister = (options) => {
-    if (options.username.length <= 2) {
+    if (options.username.length <= 6) {
         return [
             {
                 field: "username",
-                message: "username must be longer than 2 characters",
+                message: "username must be longer than 6 characters",
             },
         ];
     }
@@ -26,11 +26,11 @@ const validateRegister = (options) => {
             },
         ];
     }
-    if (options.password.length <= 2) {
+    if (options.password.length <= 6) {
         return [
             {
                 field: "password",
-                message: "password must be longer than 2 characters",
+                message: "password must be longer than 6 characters",
             },
         ];
     }

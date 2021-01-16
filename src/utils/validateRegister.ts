@@ -1,11 +1,11 @@
 import { UsernamePasswordInput } from "src/resolvers/UsernamePasswordInput";
 
 export const validateRegister = (options: UsernamePasswordInput) => {
-  if (options.username.length <= 2) {
+  if (options.username.length <= 6) {
     return [
       {
         field: "username",
-        message: "username must be longer than 2 characters",
+        message: "username must be longer than 6 characters",
       },
     ];
   }
@@ -28,11 +28,11 @@ export const validateRegister = (options: UsernamePasswordInput) => {
     ];
   }
 
-  if (options.password.length <= 2) {
+  if (options.password.length <= 6) {
     return [
       {
         field: "password",
-        message: "password must be longer than 2 characters",
+        message: "password must be longer than 6 characters",
       },
     ];
   }
