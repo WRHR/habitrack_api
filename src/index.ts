@@ -9,6 +9,7 @@ import { MyContext } from "./types";
 import { HelloResolver } from "./resolvers/hello";
 import { Habit } from "./entities/Habit";
 import { HabitResolver } from "./resolvers/habit";
+import { User } from "./entities/User";
 
 const main = async () => {
   dotenv.config();
@@ -18,7 +19,7 @@ const main = async () => {
     database: process.env.DB,
     logging: true,
     synchronize: true,
-    entities: [Habit],
+    entities: [Habit, User],
   });
 
   const app = express();

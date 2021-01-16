@@ -21,6 +21,7 @@ const typeorm_1 = require("typeorm");
 const hello_1 = require("./resolvers/hello");
 const Habit_1 = require("./entities/Habit");
 const habit_1 = require("./resolvers/habit");
+const User_1 = require("./entities/User");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     yield typeorm_1.createConnection({
@@ -28,7 +29,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         database: process.env.DB,
         logging: true,
         synchronize: true,
-        entities: [Habit_1.Habit],
+        entities: [Habit_1.Habit, User_1.User],
     });
     const app = express_1.default();
     const apolloServer = new apollo_server_express_1.ApolloServer({
