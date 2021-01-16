@@ -4,9 +4,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
@@ -34,4 +37,12 @@ export class Habit extends BaseEntity {
   @Field()
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Field()
+  @PrimaryColumn()
+  userId: number
+
+  @ManyToOne(()=>User, user => user.habits)
+  @JoinColumn({name:'userId'})
+  user!: User
 }

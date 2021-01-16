@@ -73,7 +73,7 @@ let HabitResolver = class HabitResolver {
             return yield Habit_1.Habit.find();
         });
     }
-    createHabit(input) {
+    createHabit(input, { req }) {
         return __awaiter(this, void 0, void 0, function* () {
             let habit;
             if (!input.name) {
@@ -97,7 +97,7 @@ let HabitResolver = class HabitResolver {
                 };
             }
             try {
-                const result = yield Habit_1.Habit.create(Object.assign({}, input)).save();
+                const result = yield Habit_1.Habit.create(Object.assign(Object.assign({}, input), { userId: req.session.userId })).save();
                 habit = result;
             }
             catch (err) {
@@ -164,8 +164,9 @@ __decorate([
 __decorate([
     type_graphql_1.Mutation(() => HabitResponse),
     __param(0, type_graphql_1.Arg("input")),
+    __param(1, type_graphql_1.Ctx()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [HabitInput]),
+    __metadata("design:paramtypes", [HabitInput, Object]),
     __metadata("design:returntype", Promise)
 ], HabitResolver.prototype, "createHabit", null);
 __decorate([
@@ -178,7 +179,7 @@ __decorate([
 ], HabitResolver.prototype, "updateHabit", null);
 __decorate([
     type_graphql_1.Mutation(() => Boolean),
-    __param(0, type_graphql_1.Arg('id')),
+    __param(0, type_graphql_1.Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

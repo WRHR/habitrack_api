@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Habit = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
+const User_1 = require("./User");
 let Habit = class Habit extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -44,6 +45,16 @@ __decorate([
     typeorm_1.UpdateDateColumn(),
     __metadata("design:type", Date)
 ], Habit.prototype, "updatedAt", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.PrimaryColumn(),
+    __metadata("design:type", Number)
+], Habit.prototype, "userId", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => User_1.User, user => user.habits),
+    typeorm_1.JoinColumn({ name: 'userId' }),
+    __metadata("design:type", User_1.User)
+], Habit.prototype, "user", void 0);
 Habit = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()

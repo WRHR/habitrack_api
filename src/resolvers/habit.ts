@@ -7,7 +7,9 @@ import {
   Query,
   Resolver,
   ObjectType,
+  Ctx,
 } from "type-graphql";
+import { MyContext } from "../types";
 
 @ObjectType()
 class HabitError {
@@ -46,7 +48,10 @@ export class HabitResolver {
   }
 
   @Mutation(() => HabitResponse)
-  async createHabit(@Arg("input") input: HabitInput): Promise<HabitResponse> {
+  async createHabit(
+    @Arg("input") input: HabitInput,
+    @Ctx() { req }: MyContext
+  ): Promise<HabitResponse> {
     let habit;
     if (!input.name) {
       return {
@@ -69,7 +74,10 @@ export class HabitResolver {
       };
     }
     try {
-      const result = await Habit.create({ ...input }).save();
+      const result = await Habit.create({
+        ...input,
+        userId: req.session.userId,
+      }).save();
       habit = result;
     } catch (err) {
       if (err) {
@@ -121,9 +129,9 @@ export class HabitResolver {
     return { habit: await Habit.findOne({ id }) };
   }
 
-  @Mutation(()=> Boolean)
-  async deleteHabit(@Arg('id') id:number):Promise<Boolean>{
-    await Habit.delete(id)
-    return true
+  @Mutation(() => Boolean)
+  async deleteHabit(@Arg("id") id: number): Promise<Boolean> {
+    await Habit.delete(id);
+    return true;
   }
 }
