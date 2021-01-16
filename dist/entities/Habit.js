@@ -28,6 +28,11 @@ __decorate([
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.Column(),
+    __metadata("design:type", Boolean)
+], Habit.prototype, "gorb", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.Column(),
     __metadata("design:type", String)
 ], Habit.prototype, "motivation", void 0);
 __decorate([

@@ -24,6 +24,10 @@ export class Habit extends BaseEntity {
 
   @Field()
   @Column()
+  gorb:boolean
+
+  @Field()
+  @Column()
   motivation:string
 
   @Field()
