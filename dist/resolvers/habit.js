@@ -64,6 +64,10 @@ __decorate([
     type_graphql_1.Field(),
     __metadata("design:type", Number)
 ], HabitInput.prototype, "goal", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    __metadata("design:type", Boolean)
+], HabitInput.prototype, "gorb", void 0);
 HabitInput = __decorate([
     type_graphql_1.InputType()
 ], HabitInput);

@@ -24,7 +24,7 @@ export class Habit extends BaseEntity {
 
   @Field()
   @Column()
-  gorb:boolean
+  gorb!:boolean
 
   @Field()
   @Column()

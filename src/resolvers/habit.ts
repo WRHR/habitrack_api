@@ -37,7 +37,10 @@ class HabitInput {
   motivation: string;
 
   @Field()
-  goal: number;
+  goal!: number;
+
+  @Field()
+  gorb!: boolean;
 }
 
 @Resolver()
