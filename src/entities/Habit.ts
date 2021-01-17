@@ -6,9 +6,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { HabitStreak } from "./HabitStreak";
 import { User } from "./User";
 
 @ObjectType()
@@ -20,19 +22,22 @@ export class Habit extends BaseEntity {
 
   @Field()
   @Column()
-  name!:string
+  name!: string;
+
+  @OneToMany(() => HabitStreak, (hs) => hs.habit)
+  streakConnection: HabitStreak;
 
   @Field()
   @Column()
-  gorb!:boolean
+  gorb!: boolean;
 
   @Field()
   @Column()
-  motivation:string
+  motivation: string;
 
   @Field()
   @Column()
-  goal!:number
+  goal!: number;
 
   @Field(() => String)
   @CreateDateColumn()
@@ -44,9 +49,9 @@ export class Habit extends BaseEntity {
 
   @Field()
   @PrimaryColumn()
-  userId: number
+  userId: number;
 
-  @ManyToOne(()=>User, user => user.habits)
-  @JoinColumn({name:'userId'})
-  user!: User
+  @ManyToOne(() => User, (user) => user.habits)
+  @JoinColumn({ name: "userId" })
+  user!: User;
 }
