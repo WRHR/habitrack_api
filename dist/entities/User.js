@@ -13,6 +13,7 @@ exports.User = void 0;
 const type_graphql_1 = require("type-graphql");
 const typeorm_1 = require("typeorm");
 const Habit_1 = require("./Habit");
+const Streak_1 = require("./Streak");
 let User = class User extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -39,6 +40,10 @@ __decorate([
     typeorm_1.OneToMany(() => Habit_1.Habit, habit => habit.user),
     __metadata("design:type", Array)
 ], User.prototype, "habits", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Streak_1.Streak, streak => streak.user),
+    __metadata("design:type", Array)
+], User.prototype, "streaks", void 0);
 User = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()

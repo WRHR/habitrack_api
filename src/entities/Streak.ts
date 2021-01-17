@@ -4,11 +4,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { HabitStreak } from "./HabitStreak";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
@@ -27,6 +29,9 @@ export class Streak extends BaseEntity {
 
   @OneToMany(() => HabitStreak, (hs) => hs.streak)
   habitConnection: HabitStreak;
+
+  @ManyToOne(() => User, (user) => user.streaks)
+  user: User;
 
   @Field(() => String)
   @CreateDateColumn()

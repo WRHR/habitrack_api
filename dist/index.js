@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const dotenv_1 = __importDefault(require("dotenv"));
-const constants_1 = require("./constants");
 const express_1 = __importDefault(require("express"));
 const apollo_server_express_1 = require("apollo-server-express");
 const type_graphql_1 = require("type-graphql");
@@ -22,12 +21,14 @@ const typeorm_1 = require("typeorm");
 const ioredis_1 = __importDefault(require("ioredis"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_redis_1 = __importDefault(require("connect-redis"));
+const constants_1 = require("./constants");
 const hello_1 = require("./resolvers/hello");
 const Habit_1 = require("./entities/Habit");
 const habit_1 = require("./resolvers/habit");
 const User_1 = require("./entities/User");
 const user_1 = require("./resolvers/user");
 const Streak_1 = require("./entities/Streak");
+const HabitStreak_1 = require("./entities/HabitStreak");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     yield typeorm_1.createConnection({
@@ -35,7 +36,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
         database: process.env.DB,
         logging: true,
         synchronize: true,
-        entities: [Habit_1.Habit, User_1.User, Streak_1.Streak],
+        entities: [Habit_1.Habit, User_1.User, Streak_1.Streak, HabitStreak_1.HabitStreak],
     });
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);

@@ -9,49 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Streak = void 0;
-const type_graphql_1 = require("type-graphql");
+exports.HabitStreak = void 0;
 const typeorm_1 = require("typeorm");
-const HabitStreak_1 = require("./HabitStreak");
-const User_1 = require("./User");
-let Streak = class Streak extends typeorm_1.BaseEntity {
+const type_graphql_1 = require("type-graphql");
+const Habit_1 = require("./Habit");
+const Streak_1 = require("./Streak");
+let HabitStreak = class HabitStreak {
 };
 __decorate([
-    type_graphql_1.Field(),
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryColumn(),
     __metadata("design:type", Number)
-], Streak.prototype, "id", void 0);
+], HabitStreak.prototype, "habitId", void 0);
 __decorate([
-    type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.PrimaryColumn(),
     __metadata("design:type", Number)
-], Streak.prototype, "highestStreak", void 0);
+], HabitStreak.prototype, "streakId", void 0);
 __decorate([
-    type_graphql_1.Field(),
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
-], Streak.prototype, "currentStreak", void 0);
+    typeorm_1.ManyToOne(() => Habit_1.Habit, (habit) => habit.streakConnection),
+    typeorm_1.JoinColumn({ name: "habitId" }),
+    __metadata("design:type", Habit_1.Habit)
+], HabitStreak.prototype, "habit", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => HabitStreak_1.HabitStreak, (hs) => hs.streak),
-    __metadata("design:type", HabitStreak_1.HabitStreak)
-], Streak.prototype, "habitConnection", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => User_1.User, (user) => user.streaks),
-    __metadata("design:type", User_1.User)
-], Streak.prototype, "user", void 0);
+    typeorm_1.ManyToOne(() => Streak_1.Streak, (streak) => streak.habitConnection),
+    typeorm_1.JoinColumn({ name: "streakId" }),
+    __metadata("design:type", Streak_1.Streak)
+], HabitStreak.prototype, "streak", void 0);
 __decorate([
     type_graphql_1.Field(() => String),
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
-], Streak.prototype, "createdAt", void 0);
+], HabitStreak.prototype, "createdAt", void 0);
 __decorate([
     type_graphql_1.Field(),
     typeorm_1.UpdateDateColumn(),
     __metadata("design:type", Date)
-], Streak.prototype, "updatedAt", void 0);
-Streak = __decorate([
+], HabitStreak.prototype, "updatedAt", void 0);
+HabitStreak = __decorate([
     type_graphql_1.ObjectType(),
     typeorm_1.Entity()
-], Streak);
-exports.Streak = Streak;
-//# sourceMappingURL=Streak.js.map
+], HabitStreak);
+exports.HabitStreak = HabitStreak;
+//# sourceMappingURL=HabitStreak.js.map
