@@ -1,30 +1,35 @@
-import { Field, ObjectType } from 'type-graphql'
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
-import { Habit } from './Habit'
-import { Streak } from './Streak'
+import { Field, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Habit } from "./Habit";
+import { Streak } from "./Streak";
 
 @ObjectType()
 @Entity()
 export class User extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
-  id!:number
+  id!: number;
 
   @Field()
+  @Column({ unique: true })
+  username!: string;
+
   @Column()
-  username!:string
+  password!: string;
 
   @Field()
-  @Column()
-  password!:string
+  @Column({ unique: true })
+  email!: string;
 
-  @Field()
-  @Column()
-  email!:string
+  @OneToMany(() => Habit, (habit) => habit.user, { cascade: true })
+  habits: Habit[];
 
-  @OneToMany(()=>Habit, habit => habit.user)
-  habits: Habit[]
-
-  @OneToMany(()=>Streak, streak =>streak.user)
-  streaks: Streak[]
+  @OneToMany(() => Streak, (streak) => streak.user)
+  streaks: Streak[];
 }
