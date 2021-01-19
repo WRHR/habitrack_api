@@ -1,7 +1,6 @@
-import { Streak } from "src/entities/Streak";
+import { Streak } from "../entities/Streak";
 import { Arg, Mutation, Resolver } from "type-graphql";
 import { HabitStreak } from "../entities/HabitStreak";
-import { StreakResolver } from "./streak";
 
 @Resolver()
 export class HabitStreakResolver {

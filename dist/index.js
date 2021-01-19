@@ -30,6 +30,7 @@ const user_1 = require("./resolvers/user");
 const Streak_1 = require("./entities/Streak");
 const HabitStreak_1 = require("./entities/HabitStreak");
 const streak_1 = require("./resolvers/streak");
+const habitSreak_1 = require("./resolvers/habitSreak");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     yield typeorm_1.createConnection({
@@ -60,7 +61,7 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [hello_1.HelloResolver, habit_1.HabitResolver, user_1.UserResolver, streak_1.StreakResolver],
+            resolvers: [hello_1.HelloResolver, habit_1.HabitResolver, user_1.UserResolver, streak_1.StreakResolver, habitSreak_1.HabitStreakResolver],
             validate: false,
         }),
         context: ({ req, res }) => ({ req, res, redis }),

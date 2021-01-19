@@ -19,6 +19,7 @@ import { UserResolver } from "./resolvers/user";
 import { Streak } from "./entities/Streak";
 import { HabitStreak } from "./entities/HabitStreak";
 import { StreakResolver } from "./resolvers/streak";
+import { HabitStreakResolver } from "./resolvers/habitSreak";
 
 const main = async () => {
   dotenv.config();
@@ -57,7 +58,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [HelloResolver, HabitResolver, UserResolver, StreakResolver],
+      resolvers: [HelloResolver, HabitResolver, UserResolver, StreakResolver, HabitStreakResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res, redis }),

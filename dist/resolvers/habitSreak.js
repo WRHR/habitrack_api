@@ -22,7 +22,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HabitStreakResolver = void 0;
-const Streak_1 = require("src/entities/Streak");
+const Streak_1 = require("../entities/Streak");
 const type_graphql_1 = require("type-graphql");
 const HabitStreak_1 = require("../entities/HabitStreak");
 let HabitStreakResolver = class HabitStreakResolver {
