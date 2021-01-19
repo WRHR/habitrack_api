@@ -22,11 +22,11 @@ export class Streak extends BaseEntity {
   id!: number;
 
   @Field()
-  @Column({default:1})
+  @Column({default:0})
   highestStreak: number;
 
   @Field()
-  @Column({default:1})
+  @Column({default:0})
   currentStreak: number;
 
   @Field()

@@ -23,12 +23,12 @@ __decorate([
 ], Streak.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column({ default: 1 }),
+    typeorm_1.Column({ default: 0 }),
     __metadata("design:type", Number)
 ], Streak.prototype, "highestStreak", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column({ default: 1 }),
+    typeorm_1.Column({ default: 0 }),
     __metadata("design:type", Number)
 ], Streak.prototype, "currentStreak", void 0);
 __decorate([

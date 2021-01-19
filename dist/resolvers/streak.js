@@ -38,8 +38,23 @@ let StreakResolver = class StreakResolver {
                 userId: req.session.userId,
             });
             let habit = yield Habit_1.Habit.findOne({ id: habitId });
-            yield HabitStreak_1.HabitStreak.create({ habit, streak });
+            streak.save();
+            yield HabitStreak_1.HabitStreak.create({ habit, streak }).save();
             return streak;
+        });
+    }
+    updateStreakValues(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let streak = yield Streak_1.Streak.findOne({ id });
+            let sMax = streak === null || streak === void 0 ? void 0 : streak.highestStreak;
+            if (streak) {
+                let sCurrent = streak.currentStreak + 1;
+                if (streak.highestStreak < streak.currentStreak) {
+                    sMax = streak.currentStreak;
+                }
+                Streak_1.Streak.update({ id }, { highestStreak: sMax, currentStreak: sCurrent });
+            }
+            return yield Streak_1.Streak.findOne({ id });
         });
     }
 };
@@ -58,6 +73,13 @@ __decorate([
     __metadata("design:paramtypes", [Number, Object]),
     __metadata("design:returntype", Promise)
 ], StreakResolver.prototype, "createStreak", null);
+__decorate([
+    type_graphql_1.Mutation(() => Streak_1.Streak),
+    __param(0, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], StreakResolver.prototype, "updateStreakValues", null);
 StreakResolver = __decorate([
     type_graphql_1.Resolver()
 ], StreakResolver);
