@@ -14,7 +14,7 @@ const typeorm_1 = require("typeorm");
 const type_graphql_1 = require("type-graphql");
 const Habit_1 = require("./Habit");
 const Streak_1 = require("./Streak");
-let HabitStreak = class HabitStreak {
+let HabitStreak = class HabitStreak extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryColumn(),

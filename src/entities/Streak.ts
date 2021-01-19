@@ -4,8 +4,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -20,17 +22,22 @@ export class Streak extends BaseEntity {
   id!: number;
 
   @Field()
-  @Column()
+  @Column({default:1})
   highestStreak: number;
 
   @Field()
-  @Column()
+  @Column({default:1})
   currentStreak: number;
+
+  @Field()
+  @PrimaryColumn()
+  userId:number
 
   @OneToMany(() => HabitStreak, (hs) => hs.streak)
   habitConnection: HabitStreak;
 
   @ManyToOne(() => User, (user) => user.streaks)
+  @JoinColumn({name:'userId'})
   user: User;
 
   @Field(() => String)

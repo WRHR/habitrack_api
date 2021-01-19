@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -12,7 +13,7 @@ import { Streak } from "./Streak";
 
 @ObjectType()
 @Entity()
-export class HabitStreak {
+export class HabitStreak extends BaseEntity{
   @PrimaryColumn()
   habitId: number;
 

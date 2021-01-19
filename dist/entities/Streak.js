@@ -23,20 +23,26 @@ __decorate([
 ], Streak.prototype, "id", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.Column({ default: 1 }),
     __metadata("design:type", Number)
 ], Streak.prototype, "highestStreak", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.Column(),
+    typeorm_1.Column({ default: 1 }),
     __metadata("design:type", Number)
 ], Streak.prototype, "currentStreak", void 0);
+__decorate([
+    type_graphql_1.Field(),
+    typeorm_1.PrimaryColumn(),
+    __metadata("design:type", Number)
+], Streak.prototype, "userId", void 0);
 __decorate([
     typeorm_1.OneToMany(() => HabitStreak_1.HabitStreak, (hs) => hs.streak),
     __metadata("design:type", HabitStreak_1.HabitStreak)
 ], Streak.prototype, "habitConnection", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => User_1.User, (user) => user.streaks),
+    typeorm_1.JoinColumn({ name: 'userId' }),
     __metadata("design:type", User_1.User)
 ], Streak.prototype, "user", void 0);
 __decorate([
