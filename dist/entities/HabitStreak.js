@@ -12,23 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HabitStreak = void 0;
 const typeorm_1 = require("typeorm");
 const type_graphql_1 = require("type-graphql");
-const Habit_1 = require("./Habit");
 const Streak_1 = require("./Streak");
 let HabitStreak = class HabitStreak extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryColumn(),
     __metadata("design:type", Number)
-], HabitStreak.prototype, "habitId", void 0);
-__decorate([
-    typeorm_1.PrimaryColumn(),
-    __metadata("design:type", Number)
 ], HabitStreak.prototype, "streakId", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => Habit_1.Habit, (habit) => habit.streakConnection),
-    typeorm_1.JoinColumn({ name: "habitId" }),
-    __metadata("design:type", Habit_1.Habit)
-], HabitStreak.prototype, "habit", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => Streak_1.Streak, (streak) => streak.habitConnection),
     typeorm_1.JoinColumn({ name: "streakId" }),

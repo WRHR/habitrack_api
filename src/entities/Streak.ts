@@ -7,10 +7,12 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Habit } from "./Habit";
 import { HabitStreak } from "./HabitStreak";
 import { User } from "./User";
 
@@ -22,22 +24,29 @@ export class Streak extends BaseEntity {
   id!: number;
 
   @Field()
-  @Column({default:0})
+  @Column({ default: 0 })
   highestStreak: number;
 
   @Field()
-  @Column({default:0})
+  @Column({ default: 0 })
   currentStreak: number;
 
   @Field()
   @PrimaryColumn()
-  userId:number
+  userId: number;
+
+  @Field()
+  @PrimaryColumn()
+  habitId!: number;
+
+  @OneToOne(() => Habit, (habit) => habit.streak)
+  habit: Habit;
 
   @OneToMany(() => HabitStreak, (hs) => hs.streak)
   habitConnection: HabitStreak;
 
   @ManyToOne(() => User, (user) => user.streaks)
-  @JoinColumn({name:'userId'})
+  @JoinColumn({ name: "userId" })
   user: User;
 
   @Field(() => String)

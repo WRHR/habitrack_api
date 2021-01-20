@@ -1,5 +1,5 @@
 import { User } from "../entities/User";
-import { MyContext } from "src/types";
+import { MyContext } from "../types";
 import {
   Resolver,
   Mutation,
@@ -34,6 +34,11 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => [User])
+  allUsers() {
+    return User.find();
+  }
+
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: MyContext) {
     if (!req.session.userId) {
@@ -80,9 +85,8 @@ export class UserResolver {
         };
       }
     }
-
     req.session.userId = user.id;
-
+    console.log("userid:", user.id);
     return { user };
   }
 
@@ -121,7 +125,6 @@ export class UserResolver {
     }
 
     req.session.userId = user.id;
-
     return { user };
   }
 

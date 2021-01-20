@@ -6,26 +6,27 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
+  OneToOne,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { HabitStreak } from "./HabitStreak";
+import { Streak } from "./Streak";
 import { User } from "./User";
 
 @ObjectType()
 @Entity()
 export class Habit extends BaseEntity {
   @Field()
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id!: number;
 
   @Field()
   @Column()
   name!: string;
 
-  @OneToMany(() => HabitStreak, (hs) => hs.habit)
-  streakConnection: HabitStreak;
+  @OneToOne(() => Streak, (streak) => streak.habit)
+  streak: Streak;
 
   @Field()
   @Column()

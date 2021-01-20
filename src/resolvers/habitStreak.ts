@@ -5,11 +5,8 @@ import { HabitStreak } from "../entities/HabitStreak";
 @Resolver()
 export class HabitStreakResolver {
   @Mutation(() => HabitStreak)
-  async addToStreak(
-    @Arg("habitId") habitId: number,
-    @Arg("streakId") streakId: number
-  ): Promise<HabitStreak> {
-    let hs = await HabitStreak.create({ habitId, streakId });
+  async addToStreak(@Arg("streakId") streakId: number): Promise<HabitStreak> {
+    let hs = await HabitStreak.create({ streakId });
     hs.save();
     let streak = await Streak.findOne({ id: streakId });
     let sMax = streak?.highestStreak;

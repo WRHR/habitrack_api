@@ -23,8 +23,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StreakResolver = void 0;
 const Streak_1 = require("../entities/Streak");
-const Habit_1 = require("../entities/Habit");
-const HabitStreak_1 = require("../entities/HabitStreak");
 const type_graphql_1 = require("type-graphql");
 let StreakResolver = class StreakResolver {
     myStreaks({ req }) {
@@ -36,10 +34,9 @@ let StreakResolver = class StreakResolver {
         return __awaiter(this, void 0, void 0, function* () {
             let streak = yield Streak_1.Streak.create({
                 userId: req.session.userId,
+                habitId,
             });
-            let habit = yield Habit_1.Habit.findOne({ id: habitId });
             streak.save();
-            yield HabitStreak_1.HabitStreak.create({ habit, streak }).save();
             return streak;
         });
     }

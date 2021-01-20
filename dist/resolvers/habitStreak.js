@@ -26,9 +26,9 @@ const Streak_1 = require("../entities/Streak");
 const type_graphql_1 = require("type-graphql");
 const HabitStreak_1 = require("../entities/HabitStreak");
 let HabitStreakResolver = class HabitStreakResolver {
-    addToStreak(habitId, streakId) {
+    addToStreak(streakId) {
         return __awaiter(this, void 0, void 0, function* () {
-            let hs = yield HabitStreak_1.HabitStreak.create({ habitId, streakId });
+            let hs = yield HabitStreak_1.HabitStreak.create({ streakId });
             hs.save();
             let streak = yield Streak_1.Streak.findOne({ id: streakId });
             let sMax = streak === null || streak === void 0 ? void 0 : streak.highestStreak;
@@ -45,14 +45,13 @@ let HabitStreakResolver = class HabitStreakResolver {
 };
 __decorate([
     type_graphql_1.Mutation(() => HabitStreak_1.HabitStreak),
-    __param(0, type_graphql_1.Arg("habitId")),
-    __param(1, type_graphql_1.Arg("streakId")),
+    __param(0, type_graphql_1.Arg("streakId")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], HabitStreakResolver.prototype, "addToStreak", null);
 HabitStreakResolver = __decorate([
     type_graphql_1.Resolver()
 ], HabitStreakResolver);
 exports.HabitStreakResolver = HabitStreakResolver;
-//# sourceMappingURL=habitSreak.js.map
+//# sourceMappingURL=habitStreak.js.map

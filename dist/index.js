@@ -21,6 +21,7 @@ const typeorm_1 = require("typeorm");
 const ioredis_1 = __importDefault(require("ioredis"));
 const express_session_1 = __importDefault(require("express-session"));
 const connect_redis_1 = __importDefault(require("connect-redis"));
+const cors_1 = __importDefault(require("cors"));
 const constants_1 = require("./constants");
 const hello_1 = require("./resolvers/hello");
 const Habit_1 = require("./entities/Habit");
@@ -30,7 +31,7 @@ const user_1 = require("./resolvers/user");
 const Streak_1 = require("./entities/Streak");
 const HabitStreak_1 = require("./entities/HabitStreak");
 const streak_1 = require("./resolvers/streak");
-const habitSreak_1 = require("./resolvers/habitSreak");
+const habitStreak_1 = require("./resolvers/habitStreak");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     dotenv_1.default.config();
     yield typeorm_1.createConnection({
@@ -43,6 +44,10 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const app = express_1.default();
     const RedisStore = connect_redis_1.default(express_session_1.default);
     const redis = new ioredis_1.default();
+    app.use(cors_1.default({
+        origin: "http://localhost:3000",
+        credentials: true,
+    }));
     app.use(express_session_1.default({
         name: constants_1.COOKIE_NAME,
         store: new RedisStore({
@@ -56,12 +61,18 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             secure: constants_1.__prod__,
         },
         saveUninitialized: false,
-        secret: `${process.env.REDIS_SECRET}`,
+        secret: `blooptybloop`,
         resave: false,
     }));
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
-            resolvers: [hello_1.HelloResolver, habit_1.HabitResolver, user_1.UserResolver, streak_1.StreakResolver, habitSreak_1.HabitStreakResolver],
+            resolvers: [
+                hello_1.HelloResolver,
+                habit_1.HabitResolver,
+                user_1.UserResolver,
+                streak_1.StreakResolver,
+                habitStreak_1.HabitStreakResolver,
+            ],
             validate: false,
         }),
         context: ({ req, res }) => ({ req, res, redis }),

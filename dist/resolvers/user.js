@@ -59,6 +59,9 @@ UserResponse = __decorate([
     type_graphql_1.ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
+    allUsers() {
+        return User_1.User.find();
+    }
     me({ req }) {
         if (!req.session.userId) {
             return null;
@@ -100,6 +103,7 @@ let UserResolver = class UserResolver {
                 }
             }
             req.session.userId = user.id;
+            console.log("userid:", user.id);
             return { user };
         });
     }
@@ -145,6 +149,12 @@ let UserResolver = class UserResolver {
         }));
     }
 };
+__decorate([
+    type_graphql_1.Query(() => [User_1.User]),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UserResolver.prototype, "allUsers", null);
 __decorate([
     type_graphql_1.Query(() => User_1.User, { nullable: true }),
     __param(0, type_graphql_1.Ctx()),
