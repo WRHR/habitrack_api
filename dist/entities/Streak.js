@@ -39,7 +39,7 @@ __decorate([
 ], Streak.prototype, "userId", void 0);
 __decorate([
     type_graphql_1.Field(),
-    typeorm_1.PrimaryColumn(),
+    typeorm_1.PrimaryColumn({ unique: true }),
     __metadata("design:type", Number)
 ], Streak.prototype, "habitId", void 0);
 __decorate([

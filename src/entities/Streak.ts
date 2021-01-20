@@ -36,7 +36,7 @@ export class Streak extends BaseEntity {
   userId: number;
 
   @Field()
-  @PrimaryColumn()
+  @PrimaryColumn({unique:true})
   habitId!: number;
 
   @OneToOne(() => Habit, (habit) => habit.streak)
