@@ -8,6 +8,10 @@ export class HabitStreakResolver {
   async addToStreak(@Arg("streakId") streakId: number): Promise<HabitStreak> {
     let hs = await HabitStreak.create({ streakId });
     hs.save();
+    let allhs = await HabitStreak.find({streakId: streakId})
+    if(allhs){
+      console.log(allhs)
+    }
     let streak = await Streak.findOne({ id: streakId });
     let sMax = streak?.highestStreak;
     if (streak) {
