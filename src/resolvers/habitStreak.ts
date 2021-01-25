@@ -27,4 +27,8 @@ export class HabitStreakResolver {
 
     return hs;
   }
+
+  //check for date 
+  //need 'days' to compare
+  //implement moment?
 }
