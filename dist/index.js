@@ -23,7 +23,6 @@ const express_session_1 = __importDefault(require("express-session"));
 const connect_redis_1 = __importDefault(require("connect-redis"));
 const cors_1 = __importDefault(require("cors"));
 const constants_1 = require("./constants");
-const hello_1 = require("./resolvers/hello");
 const Habit_1 = require("./entities/Habit");
 const habit_1 = require("./resolvers/habit");
 const User_1 = require("./entities/User");
@@ -67,7 +66,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
     const apolloServer = new apollo_server_express_1.ApolloServer({
         schema: yield type_graphql_1.buildSchema({
             resolvers: [
-                hello_1.HelloResolver,
                 habit_1.HabitResolver,
                 user_1.UserResolver,
                 streak_1.StreakResolver,

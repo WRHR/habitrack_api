@@ -30,6 +30,10 @@ let HabitStreakResolver = class HabitStreakResolver {
         return __awaiter(this, void 0, void 0, function* () {
             let hs = yield HabitStreak_1.HabitStreak.create({ streakId });
             hs.save();
+            let allhs = yield HabitStreak_1.HabitStreak.find({ streakId: streakId });
+            if (allhs) {
+                console.log(allhs);
+            }
             let streak = yield Streak_1.Streak.findOne({ id: streakId });
             let sMax = streak === null || streak === void 0 ? void 0 : streak.highestStreak;
             if (streak) {

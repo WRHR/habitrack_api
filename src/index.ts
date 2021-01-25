@@ -11,7 +11,6 @@ import cors from "cors";
 import { COOKIE_NAME, __prod__ } from "./constants";
 import { MyContext } from "./types";
 
-import { HelloResolver } from "./resolvers/hello";
 import { Habit } from "./entities/Habit";
 import { HabitResolver } from "./resolvers/habit";
 import { User } from "./entities/User";
@@ -66,7 +65,6 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [
-        HelloResolver,
         HabitResolver,
         UserResolver,
         StreakResolver,
