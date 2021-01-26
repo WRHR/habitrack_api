@@ -56,7 +56,7 @@ export class StreakResolver {
     let streak = await Streak.findOne({ id });
     if (streak) {
       let sCurrent = 0;
-      Streak.update({ id }, { highestStreak: sMax, currentStreak: sCurrent });
+      Streak.update({ id }, { currentStreak: sCurrent });
     }
     return await Streak.findOne({ id });
   }
