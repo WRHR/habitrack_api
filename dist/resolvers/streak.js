@@ -54,6 +54,30 @@ let StreakResolver = class StreakResolver {
             return yield Streak_1.Streak.findOne({ id });
         });
     }
+    addToStreak(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let streak = yield Streak_1.Streak.findOne({ id });
+            let sMax = streak === null || streak === void 0 ? void 0 : streak.highestStreak;
+            if (streak) {
+                let sCurrent = streak.currentStreak + 1;
+                if (streak.highestStreak < streak.currentStreak) {
+                    sMax = streak.currentStreak;
+                }
+                Streak_1.Streak.update({ id }, { highestStreak: sMax, currentStreak: sCurrent });
+            }
+            return yield Streak_1.Streak.findOne({ id });
+        });
+    }
+    breakStreak(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let streak = yield Streak_1.Streak.findOne({ id });
+            if (streak) {
+                let sCurrent = 0;
+                Streak_1.Streak.update({ id }, { currentStreak: sCurrent });
+            }
+            return yield Streak_1.Streak.findOne({ id });
+        });
+    }
 };
 __decorate([
     type_graphql_1.Query(() => [Streak_1.Streak], { nullable: true }),
@@ -77,6 +101,20 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], StreakResolver.prototype, "updateStreakValues", null);
+__decorate([
+    type_graphql_1.Mutation(() => Streak_1.Streak),
+    __param(0, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], StreakResolver.prototype, "addToStreak", null);
+__decorate([
+    type_graphql_1.Mutation(() => Streak_1.Streak),
+    __param(0, type_graphql_1.Arg("id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], StreakResolver.prototype, "breakStreak", null);
 StreakResolver = __decorate([
     type_graphql_1.Resolver()
 ], StreakResolver);
