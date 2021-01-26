@@ -36,4 +36,28 @@ export class StreakResolver {
     }
     return await Streak.findOne({ id });
   }
+
+  @Mutation(() => Streak)
+  async addToStreak(@Arg("id") id: number): Promise<Streak | undefined> {
+    let streak = await Streak.findOne({ id });
+    let sMax = streak?.highestStreak;
+    if (streak) {
+      let sCurrent = streak.currentStreak + 1;
+      if (streak.highestStreak < streak.currentStreak) {
+        sMax = streak.currentStreak;
+      }
+      Streak.update({ id }, { highestStreak: sMax, currentStreak: sCurrent });
+    }
+    return await Streak.findOne({ id });
+  }
+ 
+  @Mutation(() => Streak)
+  async breakStreak(@Arg("id") id: number): Promise<Streak | undefined> {
+    let streak = await Streak.findOne({ id });
+    if (streak) {
+      let sCurrent = 0;
+      Streak.update({ id }, { highestStreak: sMax, currentStreak: sCurrent });
+    }
+    return await Streak.findOne({ id });
+  }
 }
